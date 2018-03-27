@@ -1,0 +1,1 @@
+void rdwr_arq(char* nome, char* idade);
