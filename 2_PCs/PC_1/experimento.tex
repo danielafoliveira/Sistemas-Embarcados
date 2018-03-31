@@ -1,0 +1,46 @@
+\section{Desenvolvimento}
+
+A dupla realizará a construção de um protótipo para a prova de conceito. O sistema simulará a fachada de um estabelecimento, ou uma residência. Na parte exterior, haverá uma porta com uma trava eletrônica, uma câmera para o reconhecimento facial, e um botão para solicitar entrada. No interior estará a trava eletrônica e uma central de processamento conectada à rede para envio de dados estatísticos à nuvem.
+
+\subsection{Descrição do Hardware}
+
+Será montada uma porta de madeira em miniatura (da ordem de 50 cm x 30 cm), com a devida fixação em um portal também de madeira, que por sua vez será fixado em uma base que permita o transporte para a avaliação em sala de aula. Assim, serão necessárias duas dobradiças, cantoneiras e parafusos.
+
+Na porta será instalada uma trava eletrônica, do tipo solenoide de 12V, mostrada na figura \ref{trava}. Portanto será necessário também uma fonte de 12V. A ativação deste dispositivo será feita utilizando um transistor TIP41 como chave.
+
+
+\begin{figure}[h]
+\caption{Trava eletrônica solenoide 12V}
+\centering % para centralizarmos a figura
+\includegraphics[width=5cm]{trava.jpg} % leia abaixo
+\label{trava}
+\end{figure}
+
+
+Será instalado um botão do tipo pushbutton em um suporte que simule uma parede. Este será a ?campainha?.
+
+Do mesmo lado haverá uma câmera RGB apontada para o usuário.
+
+Será utilizado um alto falante de 3W para reproduzir áudios de ?bem vindo? ou ?acesso negado? ao usuário.
+
+Do lado interno será instalada a Raspberry Pi 3, onde será embarcado o sistema de controle. Os dispositivos citados acima estarão conectados a ela. A Raspberry também estará conectada a um roteador via Wifi para enviar dados estatísticos a um servidor e para permitir que o usuário administre as permissões via rede.
+
+Lista de materiais necessários:
+
+\begin{itemize}
+\item Placa de MDF 10mm
+\item Os itens são separados por um espaço adicional.
+\item Trava eletrônica solenoide 12V
+\item Fonte 12V
+\item 2 cantoneiras
+\item Parafusos para madeira
+\item Pushbutton
+\item Câmera RGB
+\item Alto falante de 3W (com amplificador de potência)
+\item Raspberry Pi 3
+\item Roteador Wifi
+\item Devidos cabos para conexões
+\end{itemize}
+
+
+\subsection{Descrição do Software}
