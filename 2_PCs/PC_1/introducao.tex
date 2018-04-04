@@ -2,17 +2,26 @@
 
 \subsection{Justificativa}
 
-O mundo encontra-se em uma grande evolução, nos dias atuais estamos de utilizar chaves para usar biometria, que é a mais difundida  a digital do dedo, porém o usuário tem quer ter uma interação direta e tatio com o sistema para a sua  liberação. Além da facilidade do uso e a impossibilidade de esquecer a chave de acesso, ou o cartão, pode-se incluir um registro para utilizar como controle de ponto, ou adapitar esse sistema para fazer controle de produtividade em uma empresa.
-Com base nessa tendência e buscando uma facilidade para o usuário, diminuião ao máximo do contato direito deste com o sistema. Portanto, esse artigo tenta construir esse sistema de reconhecimento facial de uma forma barata e confiável.
+O mundo encontra-se em uma grande evolução, nos dias atuais a automação utilizada para controle de acesso é a biometria por impressão digital. Porém o usuário tem quer ter uma interação direta e tatil com o sistema para a sua  liberação. 
+
+O controle de acesso via reconhecimento facial elimina a necessidade de interação direta do usuário e pode ser implementado juntamente ao de monitoramento por câmeras, utilizando o mesmo dispositivo para a aquisição das imagens.
+
+Além da facilidade do uso e a eliminação da possibilidade de esquecer a chave de acesso, é possivel armazenar as informações para utilizar como controle de ponto, ou adaptar para um sistema de controle/monitoramento de produtividade em uma empresa.
+
+Com base nessa tendência e buscando uma facilidade para o usuário, esse artigo propõe a construção de um sistema de reconhecimento facial para abertura de portas.
 
 \subsection{Objetivos}
 
-O objetivo desse artigo é a construção de um sistema de abertura de porta através do rosto do usuário cadastrado. Com a utilização de uma raspberry pi, uma webcam RGB e uma câmera infravermelho para o sistema e a construção de uma miniatura de porta para simulação e validação.
+O objetivo desse projeto é a construção de um sistema de abertura de porta através do reconhecimento do rosto de usuários cadastrados e enviar dados de acessos pela rede.
 
 \subsection{Requisitos}
 
-A execução desse artigo é necessária a utilização da biblioteca OPENCV, que é responsável por conseguir distinguir um rosto do resto da imagem, iremos utilizar ela na linguagem de C++.
+Para a implementação do projeto, é necessária a utilização da biblioteca OPENCV, que é responsável por conseguir distinguir um rosto do resto da imagem. Será utilizada a versão na linguagem C++.
+
+Também será necessário criar um banco de dados para guardar as informações de acesso, como pessoas cadastradas e histórico de acesso.
+
+A dupla precisará construir um protótipo para validação do sistema. Visto que será necessário apresentar o produto em sala de aula, será inviável construir todo o sistema em tamanho real, logo, a porta será confeccionada em escala reduzida.
 
 \subsection{Benefícios}
 
-Um sistema de reconhecimento facial traz alguns benefícios como: praticidade, segurança. No caso desenvolvimento o enfoque é a segurança e a possibilidade de utilizar essa validação de entrada como um ponto eletrônico para contagem de horas trabalhadas
+Um sistema de reconhecimento facial traz alguns benefícios como: praticidade, segurança. No caso desenvolvimento o enfoque é: a segurança, visto que a porta só se abrirá após o sistema reconhecer um usuário autorizado; e a possibilidade de utilizar essa validação de entrada como um ponto eletrônico para contagem de horas trabalhadas e geração de outros dados estatísticos.
