@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.31)  1 MAY 2018 10:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.31)  1 MAY 2018 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -339,19 +339,15 @@ Overfull \hbox (17.89488pt too wide) in paragraph at lines 5--6
 ry Pi, OpenCV,
  []
 
-) (./introducao.tex
-Overfull \hbox (4.72374pt too wide) in paragraph at lines 9--10
-[]\OT1/ptm/m/n/10 O re-co-nhe-ci-mento fa-cial re-quer uma bi-bli-o-teca es-pec
-[]^^Pfica,
- []
-
-) (./experimento.tex
+) (./introducao.tex) (./experimento.tex
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 9.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 9.
+
 <trava.jpg, id=1, 1027.84pt x 1027.84pt>
 File: trava.jpg Graphic file (type jpg)
  <use trava.jpg>
@@ -379,7 +375,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: circuito_botao.jpg Graphic file (type jpg)
 
 <use circuito_botao.jpg>
-Package pdftex.def Info: circuito_botao.jpg used on input line 46.
+Package pdftex.def Info: circuito_botao.jpg used on input line 48.
 (pdftex.def)             Requested size: 142.26378pt x 211.81998pt.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -388,17 +384,20 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-Overfull \hbox (8.69487pt too wide) in paragraph at lines 75--76
+Overfull \hbox (8.69487pt too wide) in paragraph at lines 77--78
 []\OT1/ptm/m/n/10 Primeiramente []e re-pro-du-zido o som de uma confirma[][]ao
  []
 
 
-Overfull \hbox (5.44536pt too wide) in paragraph at lines 82--83
+Overfull \hbox (2.94536pt too wide) in paragraph at lines 84--85
 []\OT1/ptm/m/n/10 Ao fi-nal da con-ta-gem a GPIO4 volta para o n[]^^Pvel l[]ogi
-co.
+co
  []
 
-) (./resultados.tex) (./conclusoes.tex)
+) (./resultados.tex
+LaTeX Font Info:    Font shape `OT1/ptm/m/ui' in size <10> not available
+(Font)              Font shape `OT1/ptm/m/it' tried instead on input line 6.
+) (./conclusoes.tex)
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
 
@@ -407,9 +406,11 @@ Overfull \hbox (6.42911pt too wide) in paragraph at lines 58--59
 -
  []
 
-(./apendice.tex (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+(./apendice.tex [2 <./circuito_botao.jpg>]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
 LaTeX Font Info:    Try loading font information for OML+ptm on input line 16.
@@ -419,29 +420,29 @@ File: omlptm.fd
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 16.
- [2 <./circuito_botao.jpg>] [3]
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 60.
-) [4
+) [3
 
-] (./Ponto_de_controle.aux) ) 
+] [4]
+(./Ponto_de_controle.aux) ) 
 Here is how much of TeX's memory you used:
- 6017 strings out of 493029
- 83282 string characters out of 6136234
- 291491 words of memory out of 5000000
- 9428 multiletter control sequences out of 15000+600000
+ 6020 strings out of 493029
+ 83326 string characters out of 6136234
+ 308797 words of memory out of 5000000
+ 9431 multiletter control sequences out of 15000+600000
  23326 words of font info for 50 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 38i,11n,49p,371b,1570s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/bas
-e/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on Ponto_de_controle.pdf (4 pages, 244722 bytes).
+ 38i,11n,49p,376b,1464s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/
+8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on Ponto_de_controle.pdf (4 pages, 245720 bytes).
 PDF statistics:
  49 PDF objects out of 1000 (max. 8388607)
  32 compressed objects within 1 object stream
