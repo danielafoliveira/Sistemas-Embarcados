@@ -1,0 +1,104 @@
+\section{Desenvolvimento}
+
+
+\subsection{Descrição do Hardware}
+
+Foi montado um sistema de ativação da trava eletrônica. Utilizando os seguintes materiais:
+
+\begin{itemize}
+\item Trava solenoide 12V;
+\item Fonte DC 12V (figura \ref{trava};
+\item Resistor de 1 KOhm;
+\item Transistor NPN (TIP41);
+\item Jumpers
+\item Protoboard
+\end{itemize}
+
+
+\begin{figure}[h!]
+\caption{Trava eletrônica solenoide 12V}
+\centering % para centralizarmos a figura
+\includegraphics[width=5cm]{trava.jpg} % leia abaixo
+\label{trava}
+\end{figure}
+
+Na protoboard foi montado o circuito da figura \ref{circuito}.
+
+\begin{figure}[h!]
+\caption{Ativação da trava eletrônica solenoide 12V}
+\centering % para centralizarmos a figura
+\includegraphics[width=5cm]{circuito_trava.jpg} % leia abaixo
+\label{circuito}
+\end{figure}
+
+O pino de entrada foi conectado à GPIO4 da Raspberry Pi 3 para que fossem enviados os comandos para abrir a porta. 
+
+A trava solenoide mantem a porta fechada até que seja inserida uma tensão de 12V em seus terminais. Neste momento, o solenoide faz com que o \"dente\"da trava seja retraído, liberando a abertura da porta. Ao retirar a tensão dos terminais, uma mola retorna a trava para a posição original, travando a porta novamente.
+
+Foi conectada uma caixa de som à saída P2 da Raspberry Pi para reproduzir sons de confirmação ou negação de acesso.
+
+
+Para receber a requisição de acesso, foi montado um circuito com botão em modo Pull-Up, como mostra o esquematico da figura \ref{botao}
+
+\begin{figure}[h!]
+\caption{Botão em modo Pull-Up}
+\centering % para centralizarmos a figura
+\includegraphics[width=5cm]{circuito_botao.jpg} % leia abaixo
+\label{botao}
+\end{figure}
+
+
+\subsection{Descrição do Software}
+
+\subsubsection{Campainha}
+
+A GPIO3 foi configurada de modo a ficar em modo 
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+Modo de espera
+Botão foi pressionado? N-Espera S-Segue
+Envia requisição de acesso para o código principal.
+\end{lstlisting}
+
+
+
+\subsubsection{Resposta ao usuário}
+
+A rotina para liberar a porta foi feita em um arquivo de instruções bash. O código \textit{abre.sh} é mostrado no apendice.
+
+\begin{itemize}
+
+\item[1]Primeiramente é reproduzido o som de uma confirmação de acesso pela caixa de som, para que o usuário saiba que pode entrar
+
+\item[2] Depois a GPIO4 é definida como saída e colocada em nível lógico alto.
+
+
+\item[3] É definido um tempo de espera, no caso 3 segundos, para que a trava se mantenha retraída e o usuário possa empurrar a porta.
+
+\item[4] Ao final da contagem a GPIO4 volta para o nível lógico. Neste momento, ao encostar a porta, esta será trancada.
+
+\item[5] Por fim, a GPIO4 é liberada para uso em outra rotina.
+
+\end{itemize}
+
+
+
+
+
+Caso o usuário não tenha acesso cadastrado, ao tocar a campainha deve ser executado o código \textit{negado.sh}, mostrado abaixo
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+#!/bin/bash
+
+omxplayer -o local /home/pi/embarcados/projeto_final/sons/nao.mp3
+\end{lstlisting}
+
+Neste caso, a única função realizada é a reprodção de um som de negação na caixa de som.

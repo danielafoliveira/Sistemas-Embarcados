@@ -1,0 +1,65 @@
+
+\section{Apendice}
+
+Códigos utilizados
+
+Rotina do botão:
+
+
+\lstset{language=C,
+	numbers=left,
+	linewidth=10cm,
+	breaklines}
+\begin{lstlisting}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/poll.h>
+#include <unistd.h>
+
+int main(void)
+{
+	struct pollfd pfd;
+	char buffer;
+	system("echo 4       > /sys/class/gpio/export");
+	system("echo falling > /sys/class/gpio/gpio4/edge");
+	system("echo in      > /sys/class/gpio/gpio4/direction");
+	pfd.fd = open("/sys/class/gpio/gpio4/value", O_RDONLY);
+	if(pfd.fd < 0)
+	{
+		puts("Erro abrindo /sys/class/gpio/gpio4/value");
+		puts("Execute este programa como root");
+		return 1;
+	}
+	read(pfd.fd, &buffer, 1);
+	pfd.events = POLLPRI | POLLERR;
+	pfd.revents = 0;
+	poll(&pfd, 1, -1);
+	if(pfd.revents) puts("Campainha pressionada: iniciar rotina de reconhecimento");
+	close(pfd.fd);
+	system("echo 4 > /sys/class/gpio/unexport");
+	return 0;
+}
+\end{lstlisting}
+
+\textit{abre.sh}:
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+#!/bin/bash
+
+GPIO_PATH=/sys/class/gpio
+
+omxplayer -o local /home/pi/embarcados/projeto_final/sons/sim.mp3
+echo 4 >> $GPIO_PATH/export
+sudo echo out > $GPIO_PATH/gpio4/direction
+sudo echo 1 > $GPIO_PATH/gpio4/value
+sleep 3
+echo 0 > $GPIO_PATH/gpio4/value
+echo 4 >> $GPIO_PATH/unexport
+
+\end{lstlisting}

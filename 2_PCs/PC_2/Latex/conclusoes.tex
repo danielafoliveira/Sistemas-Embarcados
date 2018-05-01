@@ -1,0 +1,10 @@
+\section{Discussão e Conclusões}
+
+
+Pelos experimentos realizados, concluiu-se que o projeto pode ser implementado da forma como foi pensado inicialmente, pois tanto a comunicação da Raspberry Pi com os periféricos (trava, botão, câmera) quanto a biblioteca de reconhecimento facial do OpenCV funcionaram corretamente.
+
+Decidiu-se usar o bot do Telegram como interface do administrador com o sistema, porque assim o acesso é muito mais prático e podem ser recebidas notificações no celular sem necessidade de instalação de outros aplicativos.
+
+Ainda é necessário otimizar o uso do reconhecimento facial para que seja considerada a profundidade de campo, evitando que a porta seja aberta com a foto de um usuário cadastrado.
+
+Para este documento, foram escritos programas cuja rotina principal é específica para cada ação. Porém, para o próximo ponto de controle, os códigos serão unidos como subrotinas de um código principal de controle do sistema.

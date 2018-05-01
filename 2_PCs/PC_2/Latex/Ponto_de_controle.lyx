@@ -1,0 +1,261 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+% Template for FPL 2012 papers; to be used with:
+%          spconf.sty   - ICASSP/ICIP LaTeX style file
+%          IEEEtran.bst - IEEE bibliography style file
+
+% Created:  Apr-May 2005 - Riku Uusikartano -- riku.uusikartano@tut.fi
+% Modified: March-2012 - Daniel Muñoz Arboleda -- damuz@unb.br
+% --------------------------------------------------------------------------
+
+
+
+\usepackage{spconf}
+\usepackage{epsfig}\usepackage[brazilian]{babel}
+% Suporte para o Português
+% Suporte para acentuação sem necessidade dos comandos especiais.
+\usepackage{subfigure}
+\usepackage{multirow}
+
+
+
+
+% Titulo do documento
+% -------------------
+\title{Ponto de controle 2 \\ Controle de acesso via reconhecimento de face humana}
+
+
+% Nome dos autores
+% ----------------
+\name{
+Antônio Aldísio - 14/0130811 ---- Vitor Carvalho de Almeida - 14/0165380}
+\address{Programa de Graduação em Engenharia Eletrônica, Faculdade Gama\\
+Universidade de Brasília\\
+Gama, DF, Brasil\\\\
+email: aldisiofilho@gmail.com ---- vitorcarvalhoamd@gmail.com }
+
+
+\hyphenation{Tam-pe-re ela-bo-ra-cao}
+
+
+\end_preamble
+\options portuguese,algoruled,longend
+\use_default_options false
+\begin_modules
+algorithm2e
+\end_modules
+\maintain_unincluded_children false
+\language brazilian
+\language_package default
+\inputencoding iso8859-1
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset CommandInset include
+LatexCommand input
+preview false
+filename "resumo.lyx"
+
+\end_inset
+
+ 
+\begin_inset CommandInset include
+LatexCommand input
+preview false
+filename "introducao.lyx"
+
+\end_inset
+
+ 
+\begin_inset CommandInset include
+LatexCommand input
+preview false
+filename "experimento.lyx"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+input{resultados}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+input{conclusoes}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+
+\size small
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% IEEEtran is a LaTeX style file defining the reference formatting.
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% -----------------------------------------------------------------
+\end_layout
+
+\end_inset
+
+
+\size default
+
+\end_layout
+
+\begin_layout Section
+
+\lang brazilian
+Referencias
+\end_layout
+
+\begin_layout Description
+
+\size small
+
+\lang brazilian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+[ 1
+\end_layout
+
+\end_inset
+
+ ] https://github.com/opencv/opencv 
+\end_layout
+
+\begin_layout Description
+
+\size small
+
+\lang brazilian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+[ 2
+\end_layout
+
+\end_inset
+
+ ] https://www.filipeflop.com/blog/acionando-trava-eletrica-com-rfid/ 
+\end_layout
+
+\end_body
+\end_document
