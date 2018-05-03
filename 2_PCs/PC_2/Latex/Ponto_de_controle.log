@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.31)  1 MAY 2018 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.31)  2 MAY 2018 22:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,81 +370,198 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
- <./trava.jpg> <./circuito_trava.jpg>] <circuito_botao.jpg, id=12, 271.0125pt x
- 403.5075pt>
+]
+<circuito_botao.jpg, id=12, 271.0125pt x 403.5075pt>
 File: circuito_botao.jpg Graphic file (type jpg)
-
-<use circuito_botao.jpg>
+ <use circuito_botao.jpg>
 Package pdftex.def Info: circuito_botao.jpg used on input line 48.
 (pdftex.def)             Requested size: 142.26378pt x 211.81998pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<camera.jpeg, id=13, 1284.8pt x 722.7pt>
+File: camera.jpeg Graphic file (type jpg)
+ <use camera.jpeg>
+Package pdftex.def Info: camera.jpeg used on input line 57.
+(pdftex.def)             Requested size: 227.62204pt x 128.02927pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<cadastro.jpg, id=14, 607.26875pt x 591.20876pt>
+File: cadastro.jpg Graphic file (type jpg)
+ <use cadastro.jpg>
+Package pdftex.def Info: cadastro.jpg used on input line 70.
+(pdftex.def)             Requested size: 227.62204pt x 221.59448pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<abertura.jpg, id=15, 781.92125pt x 447.6725pt>
+File: abertura.jpg Graphic file (type jpg)
+ <use abertura.jpg>
+Package pdftex.def Info: abertura.jpg used on input line 90.
+(pdftex.def)             Requested size: 227.62204pt x 130.32036pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-Overfull \hbox (8.69487pt too wide) in paragraph at lines 77--78
-[]\OT1/ptm/m/n/10 Primeiramente []e re-pro-du-zido o som de uma confirma[][]ao
+) [2 <./trava.jpg> <./circuito_trava.jpg> <./circuito_botao.jpg> <./camera.jpeg
+>]
+Overfull \hbox (22.2548pt too wide) in paragraph at lines 112--113
+[]\OT1/ptm/m/n/10 Primeiramente []e re-pro-du-zido o som [5] de uma confirma[][
+]ao
  []
 
 
-Overfull \hbox (2.94536pt too wide) in paragraph at lines 84--85
+Overfull \hbox (2.94536pt too wide) in paragraph at lines 119--120
 []\OT1/ptm/m/n/10 Ao fi-nal da con-ta-gem a GPIO4 volta para o n[]^^Pvel l[]ogi
 co
  []
 
+
+Overfull \hbox (11.08405pt too wide) in paragraph at lines 145--146
+\OT1/ptm/m/n/10 "Ol[]a Mes-tre,o que de-seja?"O co-digo pode ser visto no ap[]e
+ndice
+ []
+
+
+Overfull \hbox (0.88403pt too wide) in paragraph at lines 155--156
+[]\OT1/ptm/m/n/10 A pri-meira re-pons[]avel pela vis[]ao com-pu-ta-ci-o-nal, ou
+ seja,
+ []
+
 ) (./resultados.tex
-LaTeX Font Info:    Font shape `OT1/ptm/m/ui' in size <10> not available
-(Font)              Font shape `OT1/ptm/m/it' tried instead on input line 6.
-) (./conclusoes.tex)
+Overfull \hbox (5.91454pt too wide) in paragraph at lines 157--1
+\OT1/ptm/m/n/10 plo da bi-blo-teca \OT1/ptm/m/it/10 face$[]$recognition\OT1/ptm
+/m/n/10 , cuja, faz a verifica[][]ao quase
+ []
+
+<montagem.jpeg, id=19, 1284.8pt x 722.7pt>
+File: montagem.jpeg Graphic file (type jpg)
+ <use montagem.jpeg>
+Package pdftex.def Info: montagem.jpeg used on input line 8.
+(pdftex.def)             Requested size: 227.62204pt x 128.02927pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (14.41438pt too wide) in paragraph at lines 13--14
+\OT1/ptm/m/n/10 sem so-bre-a-que-ci-mento do tran-sis-tor, nem fa-lha na comuni
+ca[][]ao. 
+ []
+
+[3 <./cadastro.jpg> <./abertura.jpg>]
+<bot.jpeg, id=23, 1284.8pt x 721.69624pt>
+File: bot.jpeg Graphic file (type jpg)
+ <use bot.jpeg>
+Package pdftex.def Info: bot.jpeg used on input line 22.
+(pdftex.def)             Requested size: 227.62204pt x 127.85146pt.
+
+<reconhecimento.jpeg, id=24, 1284.8pt x 721.69624pt>
+File: reconhecimento.jpeg Graphic file (type jpg)
+ <use reconhecimento.jpeg>
+Package pdftex.def Info: reconhecimento.jpeg used on input line 31.
+(pdftex.def)             Requested size: 227.62204pt x 127.85146pt.
+) (./conclusoes.tex
+Underfull \vbox (badness 7344) has occurred while \output is active []
+
+
+Overfull \hbox (40.953pt too wide) in paragraph at lines 8--9
+[]\OT1/ptm/m/n/10 A bi-bli-o-te-cas de re-co-nhe-ci-mento fa-cial OpenCV e face
+$[]$recognition
+ []
+
+
+Overfull \hbox (1.32397pt too wide) in paragraph at lines 10--11
+\OT1/ptm/m/n/10 ciam ros-tos re-ais de ros-tos em fo-tos mos-tra-das para a c[]
+amera.
+ []
+
+)
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
 
-Overfull \hbox (6.42911pt too wide) in paragraph at lines 58--59
+Overfull \hbox (4.17911pt too wide) in paragraph at lines 57--58
 []\OT1/ptm/m/n/9 ] https://www.filipeflop.com/blog/acionando-trava-eletrica-com
 -
  []
 
-(./apendice.tex [2 <./circuito_botao.jpg>]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+
+Overfull \hbox (48.67494pt too wide) in paragraph at lines 63--64
+[]\OT1/ptm/m/n/9 ] https://www.raspberrypi.org/documentation/usage/webcams/READ
+ME.md 
+ []
+
+
+Overfull \hbox (35.18419pt too wide) in paragraph at lines 65--66
+[]\OT1/ptm/m/n/9 ] https://www.raspberrypi.org/documentation/usage/audio/README
+.md 
+ []
+
+
+Overfull \hbox (23.20448pt too wide) in paragraph at lines 69--70
+[]\OT1/ptm/m/n/9 ] https://medium.com/@rosbots/ready-to-use-image-raspbian-stre
+tch-
+ []
+
+(./apendice.tex (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 14.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 14.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 17.
+ [4 <./montagem.jpeg> <./bot.jpeg> <./reconhecimento.jpeg>]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
-) [3
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
 
-]
-(./Ponto_de_controle.aux) ) 
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+) [5]
+LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 158.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6])
+[7
+
+] (./Ponto_de_controle.aux) ) 
 Here is how much of TeX's memory you used:
- 6020 strings out of 493029
- 83325 string characters out of 6136234
- 382679 words of memory out of 5000000
- 9431 multiletter control sequences out of 15000+600000
- 23326 words of font info for 50 fonts, out of 8000000 for 9000
+ 6318 strings out of 493029
+ 87191 string characters out of 6136234
+ 406983 words of memory out of 5000000
+ 9721 multiletter control sequences out of 15000+600000
+ 26491 words of font info for 56 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 38i,11n,49p,376b,1304s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/
-8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/times/utmri8a.pfb>
-Output written on Ponto_de_controle.pdf (3 pages, 238542 bytes).
+ 38i,11n,49p,543b,1638s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/bas
+e/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/times/utmri8a.pfb>
+Output written on Ponto_de_controle.pdf (7 pages, 943131 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 62 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

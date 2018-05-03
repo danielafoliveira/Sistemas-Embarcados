@@ -1,10 +1,18 @@
 \section{Introdução}
 
+O mundo encontra-se em uma grande evolução, nos dias atuais a automação utilizada para controle de acesso é a biometria por impressão digital. Porém o usuário tem quer ter uma interação direta e tatil com o sistema para a sua liberação. O controle de acesso via reconhecimento facial elimina
+a necessidade de interação direta do usuário e pode ser implementado juntamente ao de monitoramento por câmeras, utilizando o mesmo dispositivo para a aquisição das imagens. 
+
+Além da facilidade do uso e a eliminação da possibilidade de esquecer a chave de acesso, é possivel armazenar asinformações para utilizar como controle de ponto, ou adaptar para um sistema de controle/monitoramento de produtividade em uma empresa. 
+
+Com base nessa tendência e buscando uma facilidadepara o usuário, esse artigo propõe a construção de um sistema de reconhecimento facial para abertura de portas.
+
+O objetivo desse projeto é a construção de um sistema de abertura de porta através do reconhecimento do rosto de usuários cadastrados e enviar dados de acessos pela rede.
+
+Um sistema de reconhecimento facial traz alguns benefícios como: praticidade, segurança. No caso desenvolvimento o enfoque é: a segurança, visto que a porta só se abrirá após o sistema reconhecer um usuário autorizado; e a possibilidade de utilizar essa validação de entrada como um ponto eletrônico para contagem de horas trabalhadas e geração de outros dados estat??sticos
+
 Para este ponto de controle, é necessário comunicar a Raspbberry Pi com os elementos que serão utilizados no projeto.
 
 O projeto em questão utiliza uma trava solenoide, que trabalha com  tensão e corrente maiores do que a placa consegue fornecer. Logo, é necessário usar um sistema de chaveamento.
 
 Nas próximas seções são apresentadas as soluções para o problema.
-
-O reconhecimento facial deste trabalho foi feito utilizando uma biblioteca específica, chamada OpenCV. 
-

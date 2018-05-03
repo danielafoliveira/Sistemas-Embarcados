@@ -8,13 +8,13 @@ int main(void)
 {
 	struct pollfd pfd;
 	char buffer;
-	system("echo 4       > /sys/class/gpio/export");
-	system("echo falling > /sys/class/gpio/gpio4/edge");
-	system("echo in      > /sys/class/gpio/gpio4/direction");
-	pfd.fd = open("/sys/class/gpio/gpio4/value", O_RDONLY);
+	system("echo 3 > /sys/class/gpio/export");
+	system("echo falling > /sys/class/gpio/gpio3/edge");
+	system("echo in      > /sys/class/gpio/gpio3/direction");
+	pfd.fd = open("/sys/class/gpio/gpio3/value", O_RDONLY);
 	if(pfd.fd < 0)
 	{
-		puts("Erro abrindo /sys/class/gpio/gpio4/value");
+		puts("Erro abrindo /sys/class/gpio/gpio3/value");
 		puts("Execute este programa como root");
 		return 1;
 	}
@@ -25,6 +25,6 @@ int main(void)
 	poll(&pfd, 1, -1);
 	if(pfd.revents) puts("Campainha pressionada: iniciar rotina de reconhecimento");
 	close(pfd.fd);
-	system("echo 4 > /sys/class/gpio/unexport");
+	system("echo 3 > /sys/class/gpio/unexport");
 	return 0;
 }

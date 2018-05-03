@@ -33,7 +33,7 @@ Na protoboard foi montado o circuito da figura \ref{circuito}.
 
 O pino de entrada foi conectado à GPIO4 da Raspberry Pi 3 para que fossem enviados os comandos para abrir a porta. 
 
-A trava solenoide mantem a porta fechada até que seja inserida uma tensão de 12V em seus terminais. Neste momento, o solenoide faz com que o ''dente'' da trava seja retraído, liberando a abertura da porta. Ao retirar a tensão dos terminais, uma mola retorna a trava para a posição original, travando a porta novamente. [2]
+A trava solenoide mantem a porta fechada até que seja inserida uma tensão de 12V em seus terminais. Neste momento, o solenoide faz com que o ''dente'' da trava seja retraído, liberando a abertura da porta. Ao retirar a tensão dos terminais, uma mola retorna a trava para a posição original, travando a porta novamente. [1]
 
 Foi utilizada uma fonte DC de 12V - 2A com conexão Jack P4, ligada na protoboard com um conector Jack P4 fêmea.
 
@@ -49,12 +49,49 @@ Para receber a requisição de acesso, foi montado um circuito com botão em modo P
 \label{botao}
 \end{figure}
 
+Foi utilizada uma câmera com conexão USB para testes (figura \ref{camera}).
+
+\begin{figure}[h!]
+\caption{Câmera utilizada para testes}
+\centering % para centralizarmos a figura
+\includegraphics[width=8cm]{camera.jpeg} % leia abaixo
+\label{camera}
+\end{figure}
 
 \subsection{Descrição do Software}
 
-\subsubsection{Campainha}
+\subsubsection{Cadastro}
 
-A GPIO3 foi configurada de modo a ficar em modo 
+O projeto é composto de duas rotinas:  \textit{cadastrar usuario} e \textit{abertura}. Para realização dessas rotinas será utilizada a raspberry como servidor e o cliente será um BOT no Telegram [2][3]. Pode-se observar as etapas do sistema de cadastro do ponto de vista do administrador na figura abaixo: 
+
+\begin{figure}[h!]
+\caption{Rotina Cadastrar}
+\centering % para centralizarmos a figura
+\includegraphics[width=8cm]{cadastro.jpg} % leia abaixo
+\label{Rotina_cadastar}
+\end{figure}
+
+Na rotina \textit{cadastrar} será enviada uma foto via BOT Telegram, que pode ser tirada do celular ou computador do usuário e essa foto servirá como base para o sistema. Este ficará aguardando o novo usuário pressionar o botão para ativar a câmera presente na fachada, para então poder tirar uma foto dele [4] e assim fazer uma verificação com a foto enviada e validar o cadastro. Após isso, será enviada uma mensagem ao cliente (administrador) validando o cadastro do novo usuario.
+
+Para tirar uma foto com a câmera instalada na Raspberry Pi é utilizado o seguinte comando no terminal [4]:
+
+\textit{fswebcam nome$\_$imagem.jpg}
+
+Onde pode ser escolhido qualquer nome para a imagem.
+
+
+\subsubsection{Acesso e resposta ao usuário}
+
+Para a abertura da porta, será executada a rotina descrita da figura \ref{Rotina_Acesso}:
+
+\begin{figure}[h!]
+\caption{Rotina Acesso}
+\centering % para centralizarmos a figura
+\includegraphics[width=8cm]{abertura.jpg} % leia abaixo
+\label{Rotina_Acesso}
+\end{figure}
+
+A GPIO3 foi configurada de modo a ficar em modo de espera, utilizando a função \textit{polling}. Abaixo é apresentado o pseudo-código da campainha. O código completo do teste utilizado pode ser encontrado no apêndice.
 
 \lstset{language=bash,
 	numbers=left,
@@ -68,13 +105,11 @@ Envia requisição de acesso para o código principal.
 
 
 
-\subsubsection{Resposta ao usuário}
-
 A rotina para liberar a porta foi feita em um arquivo de instruções bash. O código \textit{abre.sh} é mostrado no apendice.
 
 \begin{itemize}
 
-\item[1]Primeiramente é reproduzido o som de uma confirmação de acesso pela caixa de som, para que o usuário saiba que pode entrar
+\item[1]Primeiramente é reproduzido o som [5] de uma confirmação de acesso pela caixa de som, para que o usuário saiba que pode entrar
 
 \item[2] Depois a GPIO4 é definida como saída e colocada em nível lógico alto.
 
@@ -88,10 +123,7 @@ A rotina para liberar a porta foi feita em um arquivo de instruções bash. O códi
 \end{itemize}
 
 
-
-
-
-Caso o usuário não tenha acesso cadastrado, ao tocar a campainha deve ser executado o código \textit{negado.sh}, mostrado abaixo
+Caso o usuário não tenha acesso cadastrado, ao tocar a campainha deve ser executado o código \textit{negado.sh}, mostrado abaixo.
 
 \lstset{language=bash,
 	numbers=left,
@@ -103,4 +135,23 @@ Caso o usuário não tenha acesso cadastrado, ao tocar a campainha deve ser execut
 omxplayer -o local /home/pi/embarcados/projeto_final/sons/nao.mp3
 \end{lstlisting}
 
-Neste caso, a única função realizada é a reprodção de um som de negação na caixa de som.
+Neste caso, a única função realizada é a reprodção de um som de negação na caixa de som, porém na prática, esse \textit{script} será chamado pelo servidor presente na Raspberry Pi. Após a execução deste \textit{script}, o servidor enviará para o cliente [6] a foto do sujeito que solicitou acesso.
+
+Prevendo uma visita de alguém de confiança do administrador, porém não cadastrada no sistema, ou eventuais falhas no reconhecimento facial, o administrador terá a opção de abrir a porta remotamente, via um comando master de acesso sem a necessidade de reconhecimento facial.
+
+
+\subsubsection{Servidor}
+
+O servidor é montando em cima da API disponilibilizada pelo próprio Telegram, e foi escrito na linguagem Python [2][3]. Para esse ponto de controle é realizado apenas a identificação dos texto "oi" e "olá" com a resposta do bot "Olá Mestre,o que deseja?" O codigo pode ser visto no apêndice 3.
+
+\subsubsection{Reconhecimento facial}
+
+Está sendo utilizado as seguintes biliotecas:
+\begin{itemize}
+\item opencv 3.4.1 [7]
+\item face$\_$recognition [8]
+\end{itemize}
+
+A primeira reponsável pela visão computacional, ou seja, fazer o sistema identificar onde está um rosto na imagem. Já o \textit{face$\_$recognition} é responsável pela comparação do rosto com os cadastrados na base de dados.
+
+As duas bibliotecas estão na liguagem Python e para validação da factibilidade do projeto foi utilizado um exemplo da bibloteca \textit{face$\_$recognition}, cuja, faz a verificação quase instântenia em um video ao vivo. O codigo pode ser visto no apêndice.
