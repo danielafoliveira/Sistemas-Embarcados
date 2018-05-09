@@ -22,7 +22,7 @@ def handle(msg):
         bot.sendMessage(chat_id, 'Informe o nome do usuario')
 
 # Entrar
-    if command == 'Abre':
+    if command == 'u'Abre'':
         os.system('abre.sh')
 
     if command == 'Negado':
