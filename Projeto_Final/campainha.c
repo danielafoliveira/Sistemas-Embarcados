@@ -19,7 +19,7 @@ int campainha(void)
 	{
 		puts("Erro abrindo /sys/class/gpio/gpio3/value");
 		puts("Execute este programa como root");
-		return 1;
+		return -1;
 	}
 	read(pfd.fd, &buffer, 1);
 	pfd.events = POLLPRI | POLLERR;
@@ -29,5 +29,5 @@ int campainha(void)
 	if(pfd.revents) puts("Campainha pressionada: iniciar rotina de reconhecimento");
 	close(pfd.fd);
 	system("echo 3 > /sys/class/gpio/unexport");
-	return 0;
+	return 1;
 }

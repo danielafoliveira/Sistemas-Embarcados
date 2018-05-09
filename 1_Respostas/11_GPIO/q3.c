@@ -8,7 +8,8 @@
 #include <wiringPi.h>
 
 int pin_out=7;
-int pin_in = 9;
+int pin_in = 0;
+
 
 
 
@@ -21,33 +22,36 @@ void interrompe(){
 }
 
 int main(){
- wiringPiSetup() ;
+  wiringPiSetup() ;
   pinMode(pin_out,OUTPUT);
   pinMode(pin_in, INPUT);
 
-
   int freq = 1;
-  int tempo = 1000000/(2*freq);
 
+
+  int tempo = 1000000/(2*freq);
+int tempo_usar;
   signal(SIGINT, interrompe);
 
 
-      while(1){
+    int fd[2];
+    pipe(fd);
 
-           if( !digitalRead(pin_in) ){
 
-                  freq=freq*2;
-                  if (freq == 64 && digitalRead(pin_in)==0){
-                          freq = 1;
-                   }
-                   tempo = 1000000/(2*freq);
+    if(fork()==0){
+
+  while(1){
+          if (digitalRead(pin_in)==0){
+                  read(fd[0],&tempo_usar,sizeof(int));
+                  usleep(50000); //deboucing
+                  while(digitalRead(pin_in)==0);
 
           }
-          digitalWrite(pin_out,HIGH);
-          usleep(tempo);
-        digitalWrite(pin_out,LOW);
-          usleep(tempo);
-      }
 
-   return 0;
-  }
+            digitalWrite(pin_out,HIGH);
+            usleep(tempo_usar);
+            digitalWrite(pin_out,LOW);
+            usleep(tempo_usar);
+        }
+  return 0;
+    }
