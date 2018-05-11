@@ -8,10 +8,18 @@
 #include <wiringPi.h>
 
 int pin_out=7;
-int pin_in = 0;
+int pin_in = 9;
 
+int freq = 1;
+int tempo;
 
-
+void muda_freq(int sig){
+  freq=freq*2;
+  if (freq == 128){
+    freq = 1;
+  }
+    tempo = 1000000/(2*freq);
+}
 
 void interrompe(){
 
@@ -26,32 +34,37 @@ int main(){
   pinMode(pin_out,OUTPUT);
   pinMode(pin_in, INPUT);
 
-  int freq = 1;
+  tempo = 1000000/(2*freq);
 
-
-  int tempo = 1000000/(2*freq);
-int tempo_usar;
   signal(SIGINT, interrompe);
+  signal(SIGUSR1, muda_freq);
 
+  int pid_filho = fork();
 
-    int fd[2];
-    pipe(fd);
+  if(pid_filho ==0){
 
-
-    if(fork()==0){
-
-  while(1){
-          if (digitalRead(pin_in)==0){
-                  read(fd[0],&tempo_usar,sizeof(int));
-                  usleep(50000); //deboucing
-                  while(digitalRead(pin_in)==0);
-
-          }
-
-            digitalWrite(pin_out,HIGH);
-            usleep(tempo_usar);
-            digitalWrite(pin_out,LOW);
-            usleep(tempo_usar);
-        }
-  return 0;
+    while(1){
+      digitalWrite(pin_out,HIGH);
+      usleep(tempo);
+      digitalWrite(pin_out,LOW);
+      usleep(tempo);
     }
+
+    return 0;
+
+  }
+
+
+  while (1) {
+
+    if( digitalRead(pin_in)==0 ){
+      usleep(50000);
+      kill(pid_filho,SIGUSR1);
+      while (digitalRead(pin_in)==0);
+      usleep(50000);
+    }
+
+
+}
+return 0;
+}
