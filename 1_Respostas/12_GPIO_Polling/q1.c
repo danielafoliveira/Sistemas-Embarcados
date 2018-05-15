@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <sys/poll.h>
 #include <unistd.h>
-
+#include <wiringPi.h>
 
 int freq = 1;
 int tempo;

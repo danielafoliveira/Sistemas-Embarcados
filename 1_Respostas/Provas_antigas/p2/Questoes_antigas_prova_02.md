@@ -60,9 +60,20 @@ int main(void)
 ```
 
 (a) Como o código acima executa o debounce do botão? Justifique sua resposta.
+	Realizando operações que demandam tempo quando o botão é pressionado. Pois, após o botão ser pressionado, o código só sairá do while(test) quando as condições "test = s<(N/2)" para "buffer=='0'" ou "test = s>(N/2)" para o contrario forem invalidas. Até essa verificação ser feita já se passou tempo suficiente para o botão estabilizar;
+
+
 (b) Em quais bordas (subida/descida) é feito o debounce? Justifique sua resposta.
+Nas duas, pois na função poll_btn não há diferenciação das bordas, apelas é chamado poll(pfd, 1, -1), o que identifica mudanças no arquivo especificado. E, na função main, é definido que a GPIO é sensível a ambas as bordas do botão.
+
+
 (c) Qual é a utilidade da variável 'test' dentro da função 'poll_btn()'? Justifique sua resposta.
+Agir como variável boolean, para parar o while quando a condição for atingida;
+
+
 (d) Por que a função 'lseek()' é sempre chamada antes da função 'read()' dentro da função 'poll_btn()'? Justifique sua resposta.
+Porque é necessário voltar o ponteiro do descritor de arquivo para o inicio, pois o arquivo /sys/class/gpio/gpio4/value é sempre sobrescrito.
+
 
 4. Com o código abaixo, o Raspberry Pi obtém dados de conversão A/D de 10 bits de um MSP430, seguindo um padrão previamente estabelecido para os dois. O Raspberry Pi periodicamente apresenta a média móvel das leituras no terminal. Com relação a este código, esponda:
 
@@ -122,12 +133,18 @@ int main(void)
 ```
 
 (a) Qual é a sequência de bytes pré-estabelecida para o Raspberry Pi receber uma leitura A/D? Como o MSP430 responde?
+O Raspberry Pi envia 0xA5 para o MSP430 (10100101). O MSP430 responde com 0x5A (01011010), ou seja, ele inverte os bits como resposta ao Raspberry Pi.
 
 (b) Qual é a taxa de amostragem das leituras A/D? Justifique.
+2000 amostras por segundo, pois a cada 500us é realizada a leitura de uma amostra de 2 bytes;
+
 
 (c) Qual é a baud rate na comunicação SPI deste código? Quem é o mestre e quem é o escravo?
+31250 Bd, pois cada amostra é representada por 2 bytes (16 bits). Como o clock é de 500 MHz, a cada segundo são enviados 500000/(2*8) amostras.
+
 
 (d) Quantas médias das amostras serão apresentadas no terminal? Justifique.
+50, pois o valor medio só é mostrado a cada 1000 amostras, e neste momento a variável m é incrementada. Quando m atinge M = 50, o código é encerrao.
 
 5. Controle 6 LEDs de uma árvore de natal utilizando charlieplexing, de forma que um ser humano veja todos acesos ao mesmo tempo. Pisque os LEDs numa frequência de 100 Hz.
 
