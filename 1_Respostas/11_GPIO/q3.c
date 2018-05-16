@@ -41,7 +41,7 @@ int main(){
 
   int pid_filho = fork();
 
-  if(pid_filho ==0){
+  if(getpid() ==0){
 
     while(1){
       digitalWrite(pin_out,HIGH);
