@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/poll.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <signal.h>
+
+#include"funcoes.h"
+
+int fim_curso = 17;
+int campainha = 27;
+
+int porta_aberta = 0; //sensor fim de curso na porta
+int reconhecido = 0; //sinal
+int encerrar = 0; //aivado pelo CTRL+C
+int alarme = 0;
+
+
+
+void encerra_threads(int sig){
+  puts("Programa encerrado pelo administrador!");
+  encerrar = 1;
+}
+
+void* thread_campainha(void*arg){
+  char estado = 'w';
+
+  while (!encerrar) {
+
+    estado = 'w'; //estado de espera
+    write(&pfd[1]),&estado,1);
+
+    if(poll_bot(campainha)==1 && porta_aberta == 0){ //só inicia reconhecimento se a porta estiver fechada
+      //reconhecido = função de reconhecimento;
+      if (reconhecido == 1){ //se o usuário for cadastrado
+        system("sudo ./abre.sh");
+        estado = 's';
+        write(&pfd[1]),&estado,1);
+
+        while(porta_aberta==1); //espera porta fechar
+        reconhecido == 0;
+      }
+      else{ //usuário nao cadastrado
+        system("sudo ./negado.sh");
+        estado = 'n';
+        write(&pfd[1]),&estado,1);
+      }
+
+    }
+  }
+
+}
+
+void* thread_alarme(void*arg){
+  while(!encerrar){
+    if(porta_aberta == 1 && reconhecido == 0) //se a porta abrir sem que o usuário seja reconhecido
+      alarme = 1;
+      while(alarme == 1); //espera administrador desativar alarme;
+  }
+
+}
+
+void* thread_porta(void*arg){
+  while(!encerrar){
+    porta_aberta = poll_bot(fim_curso);
+  }
+
+}
+
+int main(int argc, char const *argv[]) {
+
+  signal(SIGINT,encerra_threads); //direcionando sinal de interrupção (CTRL+C)
+  int pfd[2];
+  pipe(pdf);
+
+  int child_pid = fork();
+
+  if (child_pid == 0){
+
+      pthread_t id_campainha;
+      pthread_create(&id_campainha,NULL,&thread_campainha,NULL); //criando thread para Campainha
+      pthread_t id_alarme;
+      pthread_create(&id_alarme,NULL,&thread_alarme,NULL); //criando thread para Campainha
+
+      while (!encerrar) {
+        /* code */
+    }
+
+  }
+  else{
+
+    while (!encerrar) {
+
+    }
+
+
+    pthread_join(id_campainha,NULL);
+    pthread_join(id_alarme,NULL);
+  }
+
+  return 0;
+}

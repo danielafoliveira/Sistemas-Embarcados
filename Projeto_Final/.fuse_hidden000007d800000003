@@ -4,15 +4,16 @@
 #include <sys/poll.h>
 #include <unistd.h>
 
-#include "poll_bot.h"
+#include "funcoes.h"
 
 
 int poll_bot(int pin)
 {
+	int estado;
 	struct pollfd pfd;
 	char buffer;
 	system("echo" pin " > /sys/class/gpio/export");
-	system("echo falling > /sys/class/gpio/gpio "pin"/edge");
+	system("echo both > /sys/class/gpio/gpio "pin"/edge");
 	system("echo in      > /sys/class/gpio/gpio"pin"/direction");
 	pfd.fd = open("/sys/class/gpio/gpio"pin"/value", O_RDONLY);
 	if(pfd.fd < 0)
@@ -24,10 +25,11 @@ int poll_bot(int pin)
 	read(pfd.fd, &buffer, 1);
 	pfd.events = POLLPRI | POLLERR;
 	pfd.revents = 0;
-	puts("Augardando campainha");
+	puts("Augardando botao");
 	poll(&pfd, 1, -1);
-	if(pfd.revents) puts("Campainha pressionada: iniciar rotina de reconhecimento");
+	if(pfd.revents) puts("mudanca do botao");
+	estado = pfd.fd;
 	close(pfd.fd);
 	system("echo "pin" > /sys/class/gpio/unexport");
-	return 1;
+	return estado;
 }
