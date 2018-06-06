@@ -1,0 +1,413 @@
+\section{Apendice}
+
+
+
+Códigos utilizados
+
+\noindent\rule{\columnwidth}{2pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+Função principal: \textit{main.c}
+
+\lstset{language=C,
+	numbers=left,
+%	linewidth=10cm,
+	breaklines}
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/poll.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <signal.h>
+#include <wiringPi.h>
+#include <sys/wait.h>
+#include <string.h>
+
+#include"funcoes.h"
+
+int fim_curso = 0;
+int campainha = 2;
+int alarme = 3;
+
+int porta_aberta = 0; //sensor fim de curso na porta
+int reconhecido = 0; //sinal
+int alerta = 0; //alarme de invasão
+int child_pid;
+
+int encerrar=0;
+
+
+pthread_t id_campainha;
+pthread_t id_alarme;
+pthread_t id_porta;
+
+void encerra_prog(int sig);
+void encerra_threads(int sig);
+void* thread_campainha(void*arg);
+void* thread_alarme(void*arg);
+void* thread_porta(void*arg);
+
+int main(int argc, char const *argv[]) {
+
+  wiringPiSetup();
+  pinMode(fim_curso, INPUT);
+  pinMode(alarme, OUTPUT);
+
+  if (fork() == 0){
+      child_pid = getpid();
+      signal(SIGINT,encerra_threads); //direcionando sinal de interrupção (CTRL+C)
+
+      pthread_create(&id_campainha,NULL,&thread_campainha,NULL); //criando thread para Campainha
+      pthread_create(&id_alarme,NULL,&thread_alarme,NULL); //criando thread para Campainha
+      pthread_create(&id_porta,NULL,&thread_porta,NULL); //criando thread para Campainha
+	int a;
+
+      char comando;
+      while (!encerrar) {
+        a = open("msgs_admin.txt", O_RDONLY);
+	read(a,&comando,1);
+	close(a);
+        sleep(1);
+        if (comando=='d'){
+          alerta = 0;
+        }
+        if (comando=='l'){
+          reconhecido = 1;
+        }
+        if (comando=='b'){
+          reconhecido = 0;
+        }
+      }
+  }
+
+  if (fork()==0){//filho 2
+      system("./servidor 8080"); // Executa o servidor
+  }
+
+  signal(SIGINT,encerra_prog); //direcionando sinal de interrupção (CTRL+C)
+
+  while (!encerrar);
+
+  wait(NULL);
+  wait(NULL);
+
+  return 0;
+}
+void encerra_prog(int sig){
+  encerrar = 1;
+
+}
+void encerra_threads(int sig){
+  alerta = 0;
+
+  puts("Encerrando...");
+  encerrar = 1;
+  if (pthread_cancel(id_campainha) ==-1){
+    puts("tread da campainha nao foi cancelada");
+  }
+  if (pthread_cancel(id_alarme) ==-1){
+    puts("tread do alarme nao foi cancelada");
+  }
+
+  if (pthread_cancel(id_porta) ==-1){
+    puts("tread da port nao foi cancelada");
+  }
+printf("threads canceladas\n" );
+  pthread_join(id_campainha,NULL);
+  pthread_join(id_alarme,NULL);
+  pthread_join(id_porta,NULL);
+
+  system("gpio unexportall");
+ puts("Programa encerrado pelo administrador!");
+
+  exit(1);
+
+}
+
+void* thread_campainha(void*arg){
+pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+
+  while (!encerrar) {
+
+    poll_bot();
+    if(porta_aberta == 0 && alerta== 0) { //só inicia reconhecimento se a porta estiver fechada
+      if (reconhecido == 1){ //se o usuário for cadastrado
+        printf("Acesso permitido\n\n");
+        system("sudo ./abre.sh");
+
+
+        while(porta_aberta==1 && !encerrar){
+            printf("porta aberta\n\n");
+            sleep(1);
+        } //espera porta fechar
+        reconhecido = 0;
+      }
+      else{ //usuário nao cadastrado
+        puts("Acesso negado\n\n");
+        system("sudo ./negado.sh");
+
+      }
+
+    }
+  }
+  pthread_exit(0);
+
+}
+
+void* thread_alarme(void*arg){
+  while(!encerrar){
+      if(alerta == 1 && !encerrar){
+          printf("Alerta de invasao\n\n");
+          system("sudo ./alarme.sh");
+          if (encerrar ==1){
+            pthread_exit(0);
+          }
+      } //espera administrador desativar alarme;
+    }
+  pthread_exit(0);
+}
+
+void* thread_porta(void*arg){
+  pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+  while(!encerrar){
+    porta_aberta = digitalRead(fim_curso);
+    if(porta_aberta == 1 && reconhecido == 0){
+      alerta = 1;
+      while (alerta == 1 && !encerrar);
+    }
+  }
+  pthread_exit(0);
+
+}
+\end{lstlisting}
+\noindent\rule{\columnwidth}{2pt}
+
+\textit{servidor.c}
+
+\lstset{language=C,
+	numbers=left,
+%	linewidth=10cm,
+	breaklines}
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <string.h>
+#include <signal.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+
+int socket_id;
+void sigint_handler(int signum);
+void print_client_message(int client_socket);
+void end_server(void);
+
+int main(int argc, char* const argv[]){
+
+	unsigned short servidorPorta;
+	struct sockaddr_in servidorAddr;
+
+	servidorPorta = atoi(argv[1]);
+
+//Definindo o tratamento de SIGINT
+	signal(SIGINT, sigint_handler);
+
+
+//	Abrindo o socket local
+	socket_id = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if(socket_id < 0)
+	{
+		fprintf(stderr, "Erro na criacao do socket!\n");
+		exit(0);
+	}
+
+
+//Ligando o socket a porta
+	memset(&servidorAddr, 0, sizeof(servidorAddr)); // Zerando a estrutura de dados
+	servidorAddr.sin_family = AF_INET;
+	servidorAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	servidorAddr.sin_port = htons(servidorPorta);
+	if(bind(socket_id, (struct sockaddr *) &servidorAddr, sizeof(servidorAddr)) < 0)
+	{
+		fprintf(stderr, "Erro na ligacao!\n");
+		exit(0);
+	}
+
+//Tornando o socket passivo para virar um servidor
+	if(listen(socket_id, 10) < 0)
+	{
+		fprintf(stderr, "Erro!\n");
+		exit(0);
+	}
+
+	while(1)
+	{
+		int socketCliente;
+		struct sockaddr_in clienteAddr;
+		unsigned int clienteLength;
+
+		fprintf(stderr, "Aguardando a conexao de um cliente...\n\n ");
+		clienteLength = sizeof(clienteAddr);
+		if((socketCliente = accept(socket_id, (struct sockaddr *) &clienteAddr, &clienteLength)) < 0)
+			fprintf(stderr, "Falha no accept().\n");
+		fprintf(stderr, "Feito!\n");
+
+		fprintf(stderr, "Conexão do Cliente %s\n", inet_ntoa(clienteAddr.sin_addr));
+
+		fprintf(stderr, "Tratando comunicacao com o cliente... ");
+		print_client_message(socketCliente);
+		fprintf(stderr, "Feito!\n");
+
+		fprintf(stderr, "Fechando a conexao com o cliente... ");
+		close(socketCliente);
+		fprintf(stderr, "Feito\n");
+	}
+	return 0;
+}
+
+void sigint_handler(int signum)
+{
+	fprintf(stderr, "\nRecebido o sinal CTRL+C... vamos desligar o servidor!\n");
+	end_server();
+}
+
+void print_client_message(int client_socket)
+{
+  FILE *arq;
+  arq = fopen("msgs_admin.txt", "wb");
+
+	int length;
+	char text;
+	read(client_socket, &length, sizeof (length));
+	read(client_socket, &text, 1);
+  putc(text,arq); //Escreve no arquivo de transição;
+  fclose(arq);
+	if (text=='s')
+	{	fprintf(stderr, "Cliente pediu para o servidor fechar.\n");
+		end_server();
+	}
+}
+
+void end_server(void)
+{
+	fprintf(stderr, "Fechando o socket local... ");
+	close(socket_id);
+	fprintf(stderr, "Feito!\n");
+	exit(0);
+}
+\end{lstlisting}
+
+
+\noindent\rule{\columnwidth}{2pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textit{abre.sh}:
+
+
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+#!/bin/bash
+
+GPIO_PATH=/sys/class/gpio
+
+omxplayer -o local /home/pi/embarcados/projeto_final/sons/sim.mp3
+echo 4 >> $GPIO_PATH/export
+sudo echo out > $GPIO_PATH/gpio4/direction
+sudo echo 1 > $GPIO_PATH/gpio4/value
+sleep 3
+echo 0 > $GPIO_PATH/gpio4/value
+echo 4 >> $GPIO_PATH/unexport
+
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\noindent\rule{\columnwidth}{2pt}
+
+
+\textit{negado.sh}:
+
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+#!/bin/bash
+omxplayer -o local ./sons/nao.mp3
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\rule{\columnwidth}{2pt}
+\textit{alarme.sh}:
+
+
+\lstset{language=bash,
+	numbers=left,
+	linewidth=8cm,
+	breaklines}
+\begin{lstlisting}
+#!/bin/bash
+omxplayer -o local ./sons/alarme.mp3
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\noindent\rule{\columnwidth}{2pt}
+\textit{poll$\_$bot.c}
+
+\lstset{language=C,
+	numbers=left,
+%	linewidth=10cm,
+	breaklines}
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/poll.h>
+#include <unistd.h>
+
+#include "funcoes.h"
+
+
+int poll_bot()
+{
+	struct pollfd pfd;
+	char buffer;
+	system("echo 27 > /sys/class/gpio/export");
+	system("echo falling > /sys/class/gpio/gpio27/edge");
+	system("echo in > /sys/class/gpio/gpio27/direction");
+	pfd.fd = open("/sys/class/gpio/gpio27/value", O_RDONLY);
+	if(pfd.fd < 0)
+	{
+		puts("Erro abrindo /sys/class/gpio/gpio27/value");
+		puts("Execute este programa como root");
+		return -1;
+	}
+	read(pfd.fd, &buffer, 1);
+	pfd.events = POLLPRI | POLLERR;
+	pfd.revents = 0;
+	puts("Augardando botao");
+	poll(&pfd, 1, -1);
+	if(pfd.revents) puts("mudanca do botao");
+	usleep(500000);
+	close(pfd.fd);
+	system("echo 27 > /sys/class/gpio/unexport");
+	return 0;
+}
+
+\end{lstlisting}
+
+Obs: \textit{poll$\_$fim$\_$curso.c} é identico ao \textit{poll$\_$bot.c}, apenas trocando a GPIO 27 para a 17
+

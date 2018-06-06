@@ -1,0 +1,13 @@
+\section{Discussão e Conclusões}
+
+A arquitetura multi-thread permitiu que os periféricos fossem controlados simultaneamente. Isso é fundamental para o projeto, tanto do ponto de vista de experiência do usuário, que não precisa esperar o término de alguma rotina para que a função de interesse seja executada, quanto para a segurança do sistema, visto que há uma vigilancia permanente do estado da porta.
+
+Um dos problemas que a dupla teve durante o desenvolvimento do software, foi o compartilhamento de variáveis entre as threads e processos pai e filho. Inicialmente a alteração das variáveis utilizadas como flags foi feita no processo pai, e as threads criadas no processo filho realizava as leituras. Porém isso não funcionou, porquê os processos não compartilham valores de variáveis, apenas suas declarações. Esse problema foi resolvido realizando todas as operações com variáveis flags dentro do mesmo processo.
+
+Para o encerramento do programa via comando CTRL+C, foi necessário utilizar a captura do sinal SIGINT e encaminhar para uma função de encerramento. Esta realiza o cancelamento das threads e o 
+
+O servidor é um programa separado, e não uma função e nem um processo filho. Logo, para o código principal receber comandos através do servidor, foi necessário utilizar métodos de escrita em arquivo para comunicar os dois processos.
+
+
+Uma limitação das bibliotecas é que elas não diferenciam rostos reais de rostos em fotos mostradas para a câmera. Isso é um grande problema de segurança para o projeto, porém a dupla já está estudando técnicas de diferenciação destes casos.
+

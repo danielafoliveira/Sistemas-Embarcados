@@ -1,0 +1,323 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\options portuguese,algoruled,longend
+\use_default_options false
+\begin_modules
+algorithm2e
+\end_modules
+\maintain_unincluded_children false
+\language brazilian
+\language_package default
+\inputencoding iso8859-1
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+
+\lang brazilian
+Desenvolvimento
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+A dupla realizará a construção de um protótipo para a prova de conceito. O sistema simulará a fachada de um estabelecimento, ou uma residência. Na parte exterior, haverá uma porta com uma trava eletrônica, uma câmera para o reconhecimento facial, e um botão para solicitar entrada. No interior estará a trava eletrônica e uma central de processamento conectada à rede para envio de dados estatísticos à nuvem.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+subsection{Descrição do Hardware}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Será montada uma porta de madeira em miniatura (da ordem de 50 cm x 30 cm), com a devida fixação em um portal também de madeira, que por sua vez será fixado em uma base que permita o transporte para a avaliação em sala de aula. Assim, serão necessárias duas dobradiças, cantoneiras e parafusos.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Na porta será instalada uma trava eletrônica, do tipo solenoide de 12V, mostrada na figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "trava"
+
+\end_inset
+
+. Portanto será necessário também uma fonte de 12V. A ativação deste dispositivo será feita utilizando um transistor TIP41 como chave.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Trava eletrônica solenoide 12V
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% para centralizarmos a figura
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics 
+	filename trava.jpg
+	width 5cm
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% leia abaixo
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "trava"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Será instalado um botão do tipo pushbutton em um suporte que simule uma parede. Este será a ?campainha?.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Do mesmo lado haverá uma câmera RGB apontada para o usuário.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Será utilizado um alto falante de 3W para reproduzir áudios de ?bem vindo? ou ?acesso negado? ao usuário.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Do lado interno será instalada a Raspberry Pi 3, onde será embarcado o sistema de controle. Os dispositivos citados acima estarão conectados a ela. A Raspberry também estará conectada a um roteador via Wifi para enviar dados estatísticos a um servidor e para permitir que o usuário administre as permissões via rede.
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+Lista de materiais necessários:
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Placa de MDF 10mm 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Os itens são separados por um espaço adicional. 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Trava eletrônica solenoide 12V 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Fonte 12V 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+2 cantoneiras 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Parafusos para madeira 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Pushbutton 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Câmera RGB 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Alto falante de 3W (com amplificador de potência) 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Raspberry Pi 3 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Roteador Wifi 
+\end_layout
+
+\begin_layout Itemize
+
+\lang brazilian
+Devidos cabos para conexões 
+\end_layout
+
+\begin_layout Standard
+
+\lang brazilian
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+subsection{Descrição do Software}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
