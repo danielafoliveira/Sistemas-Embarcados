@@ -4,22 +4,22 @@
 #include <sys/poll.h>
 #include <unistd.h>
 
-#include "campainha.h"
+#include "poll_bot.h"
 
 
-int campainha(void)
+int poll_bot(int pin)
 {
 	struct pollfd pfd;
 	char buffer;
-	system("echo 3 > /sys/class/gpio/export");
-	system("echo falling > /sys/class/gpio/gpio3/edge");
-	system("echo in      > /sys/class/gpio/gpio3/direction");
-	pfd.fd = open("/sys/class/gpio/gpio3/value", O_RDONLY);
+	system("echo" pin " > /sys/class/gpio/export");
+	system("echo falling > /sys/class/gpio/gpio "pin"/edge");
+	system("echo in      > /sys/class/gpio/gpio"pin"/direction");
+	pfd.fd = open("/sys/class/gpio/gpio"pin"/value", O_RDONLY);
 	if(pfd.fd < 0)
 	{
-		puts("Erro abrindo /sys/class/gpio/gpio3/value");
+		puts("Erro abrindo /sys/class/gpio/gpio"pin"/value");
 		puts("Execute este programa como root");
-		return 1;
+		return -1;
 	}
 	read(pfd.fd, &buffer, 1);
 	pfd.events = POLLPRI | POLLERR;
@@ -28,6 +28,6 @@ int campainha(void)
 	poll(&pfd, 1, -1);
 	if(pfd.revents) puts("Campainha pressionada: iniciar rotina de reconhecimento");
 	close(pfd.fd);
-	system("echo 3 > /sys/class/gpio/unexport");
-	return 0;
+	system("echo "pin" > /sys/class/gpio/unexport");
+	return 1;
 }

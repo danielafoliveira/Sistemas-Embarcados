@@ -1,3 +1,3 @@
 #!/bin/bash
 
-omxplayer -o local /home/pi/embarcados/projeto_final/sons/nao.mp3
+omxplayer -o local ./sons/nao.mp3
