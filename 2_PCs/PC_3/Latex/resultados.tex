@@ -12,7 +12,22 @@ O conjunto montado ficou como mostrado na figura \ref{montagem}:
 
 A ativação da trava eletrônica foi realizada com sucesso, sem sobreaquecimento do transistor, nem falha na comunicação.
 
+Foi possível comunicar o sistema com o cliente com sucesso, assim como executar os comandos recebidos, como mostram as figuras \ref{terminal} e \ref{terminal2}.
 
+\begin{figure}[h!]
+\caption{Cliente liberando porta, porta abrindo com e sem permissão}
+\centering % para centralizarmos a figura
+\includegraphics[width=8.5cm]{termin1.png} % leia abaixo
+\label{terminal}
+\end{figure}
 
+Aqui, o primeiro comando do cliente é para liberar a  entrada. Pode-se observar que o programa só passa a obedecer novamente quando a porta é fechada. NNa segunda instrução, o cliente pede que o acesso seja bloqueado. E então ao pressionar o botão, o sistema informa "Acesso negado". Após isso foi simulada a abertura da porta por arrombamento, sem que o usuário fosse reconhecido. Imediatamente o alerta de invasão foi ativado.
 
+\begin{figure}[h!]
+\caption{Cliente desativando alarme e liberando entrada}
+\centering % para centralizarmos a figura
+\includegraphics[width=8.5cm]{termin2.png} % leia abaixo
+\label{terminal2}
+\end{figure}
 
+Aqui, a primeira instrução do cliente é para desativar o alarme. Ocorrem atrasos até que o alarme seja completamente desligado. Na segunda instrução, o cliente bloqueia o acesso e com isso também ativa o alarme. Ao pressionar o botão, o acesso é negado. Então o cliente envia o comando para liberar a porta, e então ao pressionar o botão o acesso é liberado.
